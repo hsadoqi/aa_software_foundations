@@ -16,10 +16,11 @@ p array_1.object_id         # => 70119569670520
 result_1 = ele_replace!(array_1, {2=>"two", 0=>"zero", 5=>"five"})
 p result_1                  # => [4, "two", "zero", "two"]
 p result_1.object_id        # => 70119569670520
-
+p array_1.object_id == result_1.object_id
 
 array_2 = ["Matthias", "Simcha", "Mashu", "David"]
 p array_2.object_id         # => 70119569668160
 result_2 = ele_replace!(array_2, "Matthias"=>"J", "Mashu"=>"D")
 p result_2                  # => ["J", "Simcha", "D", "David"]
 p result_2.object_id        # => 70119569668160
+p array_2.object_id == result_2.object_id
