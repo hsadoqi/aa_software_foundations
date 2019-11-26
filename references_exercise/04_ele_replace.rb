@@ -7,7 +7,7 @@
 # to be the same before and after calling your method.
 
 def ele_replace!(array, hash)
-
+    array.map!{|ele| ele = hash[ele]}
 end
 
 
@@ -16,18 +16,11 @@ p array_1.object_id         # => 70119569670520
 result_1 = ele_replace!(array_1, {2=>"two", 0=>"zero", 5=>"five"})
 p result_1                  # => [4, "two", "zero", "two"]
 p result_1.object_id        # => 70119569670520
-<<<<<<< HEAD
-
-=======
 p array_1.object_id == result_1.object_id
->>>>>>> 6374d67d1a24d7af11bb326c2431f75a607ac8be
 
 array_2 = ["Matthias", "Simcha", "Mashu", "David"]
 p array_2.object_id         # => 70119569668160
 result_2 = ele_replace!(array_2, "Matthias"=>"J", "Mashu"=>"D")
 p result_2                  # => ["J", "Simcha", "D", "David"]
 p result_2.object_id        # => 70119569668160
-<<<<<<< HEAD
-=======
 p array_2.object_id == result_2.object_id
->>>>>>> 6374d67d1a24d7af11bb326c2431f75a607ac8be
