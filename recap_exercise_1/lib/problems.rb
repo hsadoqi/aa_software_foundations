@@ -6,9 +6,17 @@
 #
 # all_vowel_pairs(["goat", "action", "tear", "impromptu", "tired", "europe"])   # => ["action europe", "tear impromptu"]
 def all_vowel_pairs(words)
+    vowels = "aeiou".split("")
+    pairs = []
 
+    (0...words.length).each do |idx1|
+        (idx1+1...words.length).each do |idx2|
+            pair_words = words[idx1] + " " + words[idx2]
+            pairs << pair_words if vowels.all?{|vowel| pair_words.include?(vowel)}
+        end
+    end
+    pairs
 end
-
 
 # Write a method, composite?, that takes in a number and returns a boolean indicating if the number
 # has factors besides 1 and itself
@@ -18,7 +26,10 @@ end
 # composite?(9)     # => true
 # composite?(13)    # => false
 def composite?(num)
-
+    (2...num).each do |n|
+        return true if num % n == 0
+    end
+    false
 end
 
 
@@ -32,7 +43,7 @@ end
 # find_bigrams("the theater is empty", ["cy", "em", "ty", "ea", "oo"])  # => ["em", "ty", "ea"]
 # find_bigrams("to the moon and back", ["ck", "oo", "ha", "at"])        # => ["ck", "oo"]
 def find_bigrams(str, bigrams)
-
+    bigrams.select {|bigram| str.include?(bigram)}
 end
 
 class Hash
@@ -50,7 +61,11 @@ class Hash
     # hash_2.my_select { |k, v| k + 1 == v }      # => {10=>11, 5=>6, 7=>8})
     # hash_2.my_select                            # => {4=>4}
     def my_select(&prc)
+        prc ||= Proc.new { |k, v| k == v }
 
+        self.select do |k, v|
+            prc.call(k, v)
+        end
     end
 end
 
@@ -64,7 +79,6 @@ class String
     # "cats".substrings     # => ["c", "ca", "cat", "cats", "a", "at", "ats", "t", "ts", "s"]
     # "cats".substrings(2)  # => ["ca", "at", "ts"]
     def substrings(length = nil)
-
     end
 
 
