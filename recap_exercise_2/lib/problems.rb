@@ -1,21 +1,37 @@
-# Write a method, least_common_multiple, that takes in two numbers and returns the smallest number that is a mutiple
+# Write a method, least_common_multiple, that takes in two numbers and returns the smallest number that is a multiple
 # of both of the given numbers
 def least_common_multiple(num_1, num_2)
-
+    num = 1
+    while num <= num_1 * num_2
+        return num if num % num_1 == 0 && num % num_2 == 0
+        num += 1
+    end
+    num
 end
 
 
 # Write a method, most_frequent_bigram, that takes in a string and returns the two adjacent letters that appear the
 # most in the string.
 def most_frequent_bigram(str)
+    subs = Hash.new(0)
 
+    (0..str.length).each do |i|
+        bigram = str[i..i+1]
+        subs[bigram] += 1
+    end 
+
+    subs.sort_by {|k, v| v}.last[0]
 end
 
 
 class Hash
     # Write a method, Hash#inverse, that returns a new hash where the key-value pairs are swapped
     def inverse
-
+        inverse_hash = {}
+        self.each do |k, v|
+            inverse_hash[v] = k
+        end
+        inverse_hash
     end
 end
 
@@ -23,7 +39,15 @@ end
 class Array
     # Write a method, Array#pair_sum_count, that takes in a target number returns the number of pairs of elements that sum to the given target
     def pair_sum_count(num)
-
+        count = 0
+        (0...self.length).each do |idx1|
+            (idx1...self.length).each do |idx2|
+                if self[idx1] + self[idx2] == num 
+                    count += 1
+                end
+            end
+        end
+        count
     end
 
     # Write a method, Array#bubble_sort, that takes in an optional proc argument.
