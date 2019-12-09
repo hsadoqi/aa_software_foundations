@@ -57,10 +57,31 @@ class Startup
     end
 
     def payday
-        @employees.map do |employee|
+        @employees.each do |employee|
             pay_employee(employee)
         end
     end 
 
+    def average_salary 
+        @employees.reduce(0){ |sum, employee| sum += salaries[employee.title]} / @employees.length
+    end
+
+    def close 
+        @employees = []
+        @funding = 0
+    end
+
+    def acquire(startup)
+        @funding += startup.funding
+
+        startup.salaries.each do |title, salary|
+            if !salaries.has_key?(title)
+                salaries[title] = salary
+            end
+        end 
+
+        @employees += startup.employees
+        startup.close
+    end
 
 end
